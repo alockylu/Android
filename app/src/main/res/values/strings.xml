@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Employees List</string>
+    <string name="btn_txt">Show Employees</string>
+    <string name="send_btn">Send employees</string>
+    <string-array name="departments">
+        <item>Sales</item>
+        <item>Marketing</item>
+        <item>Software Development</item>
+        <item>Logistics</item>
+        <item>Management</item>
+    </string-array>
+</resources>

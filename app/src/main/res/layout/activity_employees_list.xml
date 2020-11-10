@@ -23,4 +23,11 @@
         android:text="@string/send_btn"
         android:onClick="onSendBtnClick"/>
 
+    <Button
+        android:id="@+id/fontBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/increaseFont"
+        android:onClick="onFontBtnClick"/>
+
 </LinearLayout>

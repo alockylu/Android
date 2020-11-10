@@ -2,6 +2,7 @@
     <string name="app_name">Employees List</string>
     <string name="btn_txt">Show Employees</string>
     <string name="send_btn">Send employees</string>
+    <string name="increaseFont">Increase Font</string>
     <string-array name="departments">
         <item>Sales</item>
         <item>Marketing</item>

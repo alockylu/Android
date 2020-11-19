@@ -1,11 +1,11 @@
-package com.chnulabs.employees;
+package com.chnulabs.employees.entities;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Employee {
+
     private String fullName;
     private String department;
 
@@ -37,5 +37,9 @@ public class Employee {
 
     public static Stream<Employee> getEmployees(final String department) {
         return employees.stream().filter(e -> e.department.equals(department));
+    }
+
+    public static long countEmployeesBy(Department dep) {
+        return employees.stream().filter(employee -> employee.department.equals(dep.getName())).count();
     }
 }

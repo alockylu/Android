@@ -1,13 +1,22 @@
 <resources>
-    <string name="app_name">Employees List</string>
+    <string name="app_name">Employees App</string>
     <string name="btn_txt">Show Employees</string>
     <string name="send_btn">Send employees</string>
     <string name="increaseFont">Increase Font</string>
+    <string name="dep_details">Department details</string>
+    <string name="department_txt">Department:</string>
+    <string name="employees_num_txt">Total employees:</string>
+    <string name="btn_ok_txt">OK</string>
+    <string name="dep_type">Department Type:</string>
+    <string name="dep_local">Local</string>
+    <string name="dep_remote">Remote</string>
+    <string name="dep_parameters">Department parameters:</string>
+    <string name="has_trainees_txt">has trainees</string>
+    <string name="has_invalids_txt">has invalids</string>
     <string-array name="departments">
         <item>Sales</item>
         <item>Marketing</item>
         <item>Software Development</item>
         <item>Logistics</item>
-        <item>Management</item>
     </string-array>
 </resources>

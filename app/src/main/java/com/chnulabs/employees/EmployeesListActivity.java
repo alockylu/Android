@@ -9,6 +9,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
+import com.chnulabs.employees.entities.Employee;
+
 public class EmployeesListActivity extends AppCompatActivity {
 
     public static final String DEPARTMENT_NAME = "employees_list";

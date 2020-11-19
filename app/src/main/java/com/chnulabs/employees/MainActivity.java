@@ -70,4 +70,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onDepartmentDetailsBtnClick(View view) {
+        Spinner depSpinner = findViewById(R.id.dep_spinner);
+        String depName = depSpinner.getSelectedItem().toString();
+
+        Intent intent = new Intent(this, DepartmentActivity.class);
+        intent.putExtra(DepartmentActivity.DEPARTMENT_NAME, depName);
+
+        startActivity(intent);
+    }
 }

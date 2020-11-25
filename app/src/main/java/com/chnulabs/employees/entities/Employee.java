@@ -1,5 +1,7 @@
 package com.chnulabs.employees.entities;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -12,6 +14,12 @@ public class Employee {
     public Employee(String fullName, String department) {
         this.fullName = fullName;
         this.department = department;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return fullName;
     }
 
     public String getFullName() {

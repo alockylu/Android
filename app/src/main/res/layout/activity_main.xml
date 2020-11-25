@@ -1,42 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="@dimen/default_padding"
     tools:context=".MainActivity">
 
-    <Spinner
-        android:id="@+id/dep_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/departments"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="15dp"
-        android:layout_gravity="center"/>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="286dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/employees_main" />
 
     <Button
-        android:id="@+id/depDetailsBtn"
-        android:layout_width="match_parent"
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dep_details"
-        android:onClick="onDepartmentDetailsBtnClick" />
+        android:layout_marginTop="32dp"
+        android:onClick="onBtnShowDepartmentsClick"
+        android:text="@string/btn_departments_txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="@dimen/default_padding"-->
+<!--    tools:context=".MainActivity">-->
 
-    <Button
-        android:id="@+id/show_button"
-        android:onClick="onShowBtnClick"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="@string/btn_txt" />
+<!--    <Spinner-->
+<!--        android:id="@+id/dep_spinner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:entries="@array/departments"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_marginBottom="15dp"-->
+<!--        android:layout_gravity="center"/>-->
 
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimaryDark"
-        />
+<!--    <Button-->
+<!--        android:id="@+id/depDetailsBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/dep_details"-->
+<!--        android:onClick="onDepartmentDetailsBtnClick" />-->
 
-</LinearLayout>
+<!--    <Button-->
+<!--        android:id="@+id/show_button"-->
+<!--        android:onClick="onShowBtnClick"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:text="@string/btn_txt" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/timer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/colorPrimaryDark"-->
+<!--        />-->
+
+<!--</LinearLayout>-->

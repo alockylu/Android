@@ -23,7 +23,7 @@ public class DepartmentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_department);
+        setContentView(R.layout.activity_department2);
 
         Intent intent = getIntent();
         String depName = intent.getStringExtra(DEPARTMENT_NAME);
@@ -32,7 +32,7 @@ public class DepartmentActivity extends AppCompatActivity {
         EditText depNameEdit = findViewById(R.id.depNameEdit);
         depNameEdit.setText(department.getName());
 
-        EditText totalEmployeesNumEdit = findViewById(R.id.totalEmployeesNum);
+        EditText totalEmployeesNumEdit = findViewById(R.id.totalEmployeesEdit);
         totalEmployeesNumEdit.setText(String.valueOf(Employee.countEmployeesBy(department)));
 
         TextView depNameImageText = findViewById(R.id.depNameImageText);
@@ -62,5 +62,14 @@ public class DepartmentActivity extends AppCompatActivity {
                 (department.hasInvalids() ? "Has invalids" : "No invalids in department");
 
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    public void onBtnEmployeesListClick(View view) {
+        Intent localIntent = getIntent();
+        String department = localIntent.getStringExtra(DEPARTMENT_NAME);
+
+        Intent newIntent = new Intent(this, EmployeesListActivity.class);
+        newIntent.putExtra(EmployeesListActivity.DEPARTMENT_NAME, department);
+        startActivity(newIntent);
     }
 }

@@ -1,5 +1,7 @@
 package com.chnulabs.employees.entities;
 
+import androidx.annotation.NonNull;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,6 +47,16 @@ public class Department {
             new Department("Software Development", 2, true, true, true),
             new Department("Logistics", 4, false, false, true)
     );
+
+    public static List<Department> getDepartments() {
+        return departments;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name;
+    }
 
     public static Department getBy(String name) {
         return departments.stream().filter(dep -> dep.name.equals(name)).findAny().orElse(null);

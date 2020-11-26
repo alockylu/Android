@@ -14,10 +14,9 @@
     <string name="dep_parameters">Department parameters:</string>
     <string name="has_trainees_txt">has trainees</string>
     <string name="has_invalids_txt">has invalids</string>
-<!--    <string-array name="departments">-->
-<!--        <item>Sales</item>-->
-<!--        <item>Marketing</item>-->
-<!--        <item>Software Development</item>-->
-<!--        <item>Logistics</item>-->
-<!--    </string-array>-->
+    <string name="dep_id_txt">Department Id:</string>
+    <string name="dep_name_txt">Name:</string>
+    <string name="dep_add_txt">Add</string>
+    <string name="add_dep_txt">+</string>
+    <string name="btn_share">Share</string>
 </resources>

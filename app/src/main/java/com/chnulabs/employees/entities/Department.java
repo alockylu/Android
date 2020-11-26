@@ -2,6 +2,7 @@ package com.chnulabs.employees.entities;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,15 +42,19 @@ public class Department {
         return id;
     }
 
-    private static List<Department> departments = Arrays.asList(
+    private static final List<Department> departments = new ArrayList<>(Arrays.asList(
             new Department("Sales", 3, false, true, false),
             new Department("Marketing", 1, true, false, false),
             new Department("Software Development", 2, true, true, true),
             new Department("Logistics", 4, false, false, true)
-    );
+    ));
 
     public static List<Department> getDepartments() {
         return departments;
+    }
+
+    public static void addDepartment(Department department) {
+        departments.add(department);
     }
 
     @NonNull

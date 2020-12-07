@@ -63,6 +63,10 @@ public class Department {
         return name;
     }
 
+    public static Department getBy(Integer id) {
+        return departments.stream().filter(dep -> dep.id == id).findAny().orElse(null);
+    }
+
     public static Department getBy(String name) {
         return departments.stream().filter(dep -> dep.name.equals(name)).findAny().orElse(null);
     }

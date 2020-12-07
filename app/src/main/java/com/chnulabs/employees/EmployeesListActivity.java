@@ -1,15 +1,11 @@
 package com.chnulabs.employees;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.chnulabs.employees.entities.Department;
 import com.chnulabs.employees.entities.Employee;
@@ -18,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class EmployeesListActivity extends AppCompatActivity {
 
-    public static final String DEPARTMENT_NAME = "employees_list";
+    public static final String DEPARTMENT_ID = "dep_name_value";
 
 //    private float textSize;
 
@@ -28,14 +24,15 @@ public class EmployeesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_employees_list);
 
         Intent intent = getIntent();
-        String depName = intent.getStringExtra(DEPARTMENT_NAME);
+        Integer depId = intent.getIntExtra(DEPARTMENT_ID, -1);
+        Department department = Department.getBy(depId);
 
         ListView employeesList = findViewById(R.id.employeesList);
 
         ArrayAdapter<Employee> employeeArrayAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
-                Employee.getEmployees(depName).collect(Collectors.toList()));
+                Employee.getEmployees(department.getName()).collect(Collectors.toList()));
         employeesList.setAdapter(employeeArrayAdapter);
 
 //        StringBuilder txtEmployees = new StringBuilder();

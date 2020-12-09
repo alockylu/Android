@@ -43,6 +43,10 @@ public class Employee {
             )
     );
 
+    public static ArrayList<Employee> getEmployees() {
+        return employees;
+    }
+
     public static Stream<Employee> getEmployees(final String department) {
         return employees.stream().filter(e -> e.department.equals(department));
     }

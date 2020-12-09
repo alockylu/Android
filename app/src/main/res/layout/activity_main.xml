@@ -27,45 +27,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/btn_http_json"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        android:onClick="onGetJsonBtnClick"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:orientation="vertical"-->
-<!--    android:padding="@dimen/default_padding"-->
-<!--    tools:context=".MainActivity">-->
-
-<!--    <Spinner-->
-<!--        android:id="@+id/dep_spinner"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:entries="@array/departments"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_marginBottom="15dp"-->
-<!--        android:layout_gravity="center"/>-->
-
-<!--    <Button-->
-<!--        android:id="@+id/depDetailsBtn"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/dep_details"-->
-<!--        android:onClick="onDepartmentDetailsBtnClick" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/show_button"-->
-<!--        android:onClick="onShowBtnClick"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        android:text="@string/btn_txt" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/timer"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textAlignment="center"-->
-<!--        android:textColor="@color/colorPrimaryDark"-->
-<!--        />-->
-
-<!--</LinearLayout>-->

@@ -3,20 +3,24 @@ package com.chnulabs.employees;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
+import com.chnulabs.employees.database.EmployeesDatabaseHelper;
 import com.chnulabs.employees.entities.Department;
-import com.chnulabs.employees.entities.Employee;
-
-import java.util.stream.Collectors;
 
 public class EmployeesListActivity extends AppCompatActivity {
 
-    public static final String DEPARTMENT_ID = "dep_name_value";
-
-//    private float textSize;
+    public static final String DEPARTMENT_ID = "dep_id";
+    private Cursor cursor;
+    private SQLiteDatabase sqLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,49 +28,50 @@ public class EmployeesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_employees_list);
 
         Intent intent = getIntent();
-        Integer depId = intent.getIntExtra(DEPARTMENT_ID, -1);
+        int depId = intent.getIntExtra(DEPARTMENT_ID, -1);
         Department department = Department.getBy(depId);
 
-        ListView employeesList = findViewById(R.id.employeesList);
+        ListView employeesListView = findViewById(R.id.employeesList);
+        SimpleCursorAdapter adapter = getAdapterFromDbQuery(depId);
+        if (adapter != null) {
+            employeesListView.setAdapter(adapter);
+        }
 
-        ArrayAdapter<Employee> employeeArrayAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                Employee.getEmployees(department.getName()).collect(Collectors.toList()));
-        employeesList.setAdapter(employeeArrayAdapter);
-
-//        StringBuilder txtEmployees = new StringBuilder();
-//        Employee.getEmployees(depName).forEach(e -> txtEmployees.append(e.getFullName()).append("\n"));
-//
-//        TextView textView = findViewById(R.id.employees_txt);
-//        textView.setText(txtEmployees);
-//
-//        textSize = textView.getTextSize();
-//
-//        if (savedInstanceState != null) {
-//            textSize = savedInstanceState.getFloat("textSize");
-//            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//        }
     }
 
-//    @Override
-//    protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putFloat("textSize", textSize);
-//    }
+    private SimpleCursorAdapter getAdapterFromDbQuery(int depId) {
 
-//    public void onSendBtnClick(View view) {
-//        TextView textView = findViewById(R.id.employees_txt);
-//        Intent sendIntent = new Intent(Intent.ACTION_SEND);
-//        sendIntent.setType("text/plain");
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, textView.getText());
-//        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Employees List");
-//
-//        startActivity(sendIntent);
-//    }
+        SimpleCursorAdapter cursorAdapter = null;
+        SQLiteOpenHelper sqLiteOpenHelper = new EmployeesDatabaseHelper(this);
+        try {
+            sqLiteDatabase = sqLiteOpenHelper.getReadableDatabase();
 
-//    public void onFontBtnClick(View view) {
-//        textSize *= 1.1;
-//        ((TextView)findViewById(R.id.employees_txt)).setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-//    }
+            cursor = sqLiteDatabase.rawQuery("select e.id as _id, e.name as name from employees e " +
+                    "inner join departments d on e.dep_id = d.id " +
+                    "where e.dep_id = ?;", new String[] {Integer.toString(depId)});
+
+            cursorAdapter = new SimpleCursorAdapter(
+                    this, android.R.layout.simple_list_item_1, cursor,
+                    new String[] {"name"}, new int[] {android.R.id.text1}, 0
+            );
+
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        return cursorAdapter;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cursor.close();
+        sqLiteDatabase.close();
+    }
+
+
+    public void onSendBtnClick(View view) {
+//        TextView textView = findViewById(R.id.text);
+
+    }
 }

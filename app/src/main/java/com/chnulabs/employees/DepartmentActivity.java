@@ -1,7 +1,9 @@
 package com.chnulabs.employees;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -47,11 +49,10 @@ public class DepartmentActivity extends AppCompatActivity {
                         cursor.getInt(3) == 1,
                         cursor.getInt(4) == 1
                 );
-                System.out.println(cursor.getString(0));
             }
 
         } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, "Database is unavailable", Toast.LENGTH_LONG);
             toast.show();
         }
 
@@ -80,22 +81,57 @@ public class DepartmentActivity extends AppCompatActivity {
 
     public void onOkBtnClick(View view) {
 
-        String message = "Department: " + department.getName() + '\n' +
-                "Id: " + department.getId() + '\n' +
-                "Total employees: " + Employee.countEmployeesBy(department) + '\n' +
-                "Type: " + (department.isRemote() ? "Remote" : "Local") + '\n' +
-                (department.hasTrainees() ? "Has trainees!!" : "No trainees =(") + '\n' +
-                (department.hasInvalids() ? "Has invalids" : "No invalids in department");
+//        String message = "Department: " + department.getName() + '\n' +
+//                "Id: " + department.getId() + '\n' +
+//                "Total employees: " + Employee.countEmployeesBy(department) + '\n' +
+//                "Type: " + (department.isRemote() ? "Remote" : "Local") + '\n' +
+//                (department.hasTrainees() ? "Has trainees!!" : "No trainees =(") + '\n' +
+//                (department.hasInvalids() ? "Has invalids" : "No invalids in department");
+//
+//        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        SQLiteOpenHelper sqLiteOpenHelper = new EmployeesDatabaseHelper(this);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", ((TextView)findViewById(R.id.depNameEdit)).getText().toString());
+        contentValues.put("isRemote", ((RadioButton)findViewById(R.id.remoteDepType)).isChecked());
+        contentValues.put("hasTrainees", ((CheckBox)findViewById(R.id.trainees_check_box)).isChecked());
+        contentValues.put("hasInvalids", ((CheckBox)findViewById(R.id.invalids_check_box)).isChecked());
+
+        Intent intent = getIntent();
+        int depId = intent.getIntExtra(DEPARTMENT_ID, -1);
+
+        try {
+            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+            db.update("departments", contentValues, "id=?", new String[] {Integer.toString(depId)});
+            db.close();
+            NavUtils.navigateUpFromSameTask(this);
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     public void onBtnEmployeesListClick(View view) {
-        Intent localIntent = getIntent();
-        Integer departmentId = localIntent.getIntExtra(DEPARTMENT_ID, -1);
-
         Intent newIntent = new Intent(this, EmployeesListActivity.class);
-        newIntent.putExtra(EmployeesListActivity.DEPARTMENT_ID, departmentId);
+        newIntent.putExtra(EmployeesListActivity.DEPARTMENT_ID, department.getId());
         startActivity(newIntent);
+    }
+
+    public void onDelete(View view) {
+        SQLiteOpenHelper sqLiteOpenHelper = new EmployeesDatabaseHelper(this);
+
+        Intent intent = getIntent();
+        int depId = intent.getIntExtra(DEPARTMENT_ID, -1);
+
+        try {
+            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
+            db.delete("departments", "id=?", new String[] {Integer.toString(depId)});
+            db.close();
+            NavUtils.navigateUpFromSameTask(this);
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 }

@@ -60,5 +60,5 @@
         android:text="@string/dep_add_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/depNameEdit"
-        android:onClick="addDepartment"/>
+        android:onClick="onAddDepartmentBtnClick"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

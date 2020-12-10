@@ -27,24 +27,12 @@ public class AddDepartmentActivity extends AppCompatActivity {
     }
 
     public void onAddDepartmentBtnClick(View view) {
-
-        EditText depNameEdit = findViewById(R.id.depNameEdit);
-
-        SQLiteOpenHelper sqLiteOpenHelper = new EmployeesDatabaseHelper(this);
-
-        try {
-            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("name", depNameEdit.getText().toString());
-            contentValues.put("isRemote", 0);
-            contentValues.put("hasTrainees", 0);
-            contentValues.put("hasInvalids", 0);
-            db.insert("departments", null, contentValues);
-            db.close();
-            NavUtils.navigateUpFromSameTask(this);
-        } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_LONG);
-            toast.show();
-        }
+        Department dep = new Department(
+                ((EditText)findViewById(R.id.depNameEdit)).getText().toString(),
+                0,
+                true, true, true
+        );
+        dep.httpAddDepartment();
+        NavUtils.navigateUpFromSameTask(this);
     }
 }

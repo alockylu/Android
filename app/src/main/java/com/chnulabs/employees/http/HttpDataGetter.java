@@ -1,4 +1,6 @@
-package com.chnulabs.employees;
+package com.chnulabs.employees.http;
+
+import com.chnulabs.employees.entities.http.UserData;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -11,7 +13,7 @@ public class HttpDataGetter implements Runnable {
     private String url;
 
     public HttpDataGetter(String url) {
-        this.url = url;
+        this.url = url + "&token=" + UserData.token;
     }
 
     @Override

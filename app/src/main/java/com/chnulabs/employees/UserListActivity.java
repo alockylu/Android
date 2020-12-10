@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 
+import com.chnulabs.employees.http.HttpDataGetter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

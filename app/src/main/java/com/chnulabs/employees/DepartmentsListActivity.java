@@ -37,7 +37,9 @@ public class DepartmentsListActivity extends AppCompatActivity {
         ListView departmentsList = findViewById(R.id.departments_list);
 
         ArrayAdapter<Department> departmentAdapter = new ArrayAdapter<>(
-                this, android.R.layout.simple_list_item_1, getDataFromDB()
+                this,
+                android.R.layout.simple_list_item_1,
+                Department.httpGetDepartments() // getDataFromDB()
         );
 
         departmentsList.setAdapter(departmentAdapter);

@@ -33,28 +33,8 @@ public class DepartmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_department2);
 
         Intent intent = getIntent();
-        int departmentId = intent.getIntExtra(DEPARTMENT_ID, -1);
-
-        SQLiteOpenHelper sqLiteOpenHelper = new EmployeesDatabaseHelper(this);
-
-        try (SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
-             Cursor cursor = db.query("departments", new String[]{"name", "id", "isRemote", "hasTrainees", "hasInvalids"},
-                     "id=?", new String[]{Integer.toString(departmentId)},
-                     null, null, null)) {
-            while (cursor.moveToNext()) {
-                department = new Department(
-                        cursor.getString(0),
-                        cursor.getInt(1),
-                        cursor.getInt(2) == 1,
-                        cursor.getInt(3) == 1,
-                        cursor.getInt(4) == 1
-                );
-            }
-
-        } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "Database is unavailable", Toast.LENGTH_LONG);
-            toast.show();
-        }
+        int id = intent.getIntExtra(DEPARTMENT_ID, -1);
+        department = Department.httpGetDepartment(id);
 
         EditText depNameEdit = findViewById(R.id.depNameEdit);
         depNameEdit.setText(department.getName());
@@ -80,15 +60,6 @@ public class DepartmentActivity extends AppCompatActivity {
     }
 
     public void onOkBtnClick(View view) {
-
-//        String message = "Department: " + department.getName() + '\n' +
-//                "Id: " + department.getId() + '\n' +
-//                "Total employees: " + Employee.countEmployeesBy(department) + '\n' +
-//                "Type: " + (department.isRemote() ? "Remote" : "Local") + '\n' +
-//                (department.hasTrainees() ? "Has trainees!!" : "No trainees =(") + '\n' +
-//                (department.hasInvalids() ? "Has invalids" : "No invalids in department");
-//
-//        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
 
         SQLiteOpenHelper sqLiteOpenHelper = new EmployeesDatabaseHelper(this);
 
@@ -119,19 +90,9 @@ public class DepartmentActivity extends AppCompatActivity {
     }
 
     public void onDelete(View view) {
-        SQLiteOpenHelper sqLiteOpenHelper = new EmployeesDatabaseHelper(this);
-
         Intent intent = getIntent();
         int depId = intent.getIntExtra(DEPARTMENT_ID, -1);
-
-        try {
-            SQLiteDatabase db = sqLiteOpenHelper.getReadableDatabase();
-            db.delete("departments", "id=?", new String[] {Integer.toString(depId)});
-            db.close();
-            NavUtils.navigateUpFromSameTask(this);
-        } catch (SQLiteException e) {
-            Toast toast = Toast.makeText(this, "Database unavailable", Toast.LENGTH_LONG);
-            toast.show();
-        }
+        Department.httpRemoveDepartment(depId);
+        NavUtils.navigateUpFromSameTask(this);
     }
 }
